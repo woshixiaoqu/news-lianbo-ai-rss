@@ -1,0 +1,92 @@
+name: 新闻联播 AI RSS
+
+on:
+  # 每天北京时间 22:30 左右运行
+  # GitHub 使用 UTC，这里 14:30 UTC = 北京时间 22:30
+  schedule:
+    - cron: "30 14 * * *"
+
+  # 允许你手动运行
+  workflow_dispatch:
+
+  # 修改代码时也运行一次
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # 1. 下载你的代码
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      # 2. 安装 Python
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      # 3. 运行新闻联播 AI RSS 程序
+      - name: Generate AI RSS
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          AI_MODEL: deepseek-v4-pro
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          python generate.py
+
+      # 4. 把生成好的 RSS 保存回 GitHub
+      - name: Commit generated RSS
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add site/feed.xml site/index.html
+
+          if git diff --cached --quiet; then
+            echo "没有新的 RSS 内容需要提交"
+          else
+            git commit -m "Update AI RSS"
+            git push
+          fi
+
+      # 5. 配置 GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # 6. 上传网站文件
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: "./site"
+
+  deploy:
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
