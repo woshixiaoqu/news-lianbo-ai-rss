@@ -22,15 +22,19 @@ SOURCE_BRANCH = "master"
 # AI_API_URL = "https://api.deepseek.com/chat/completions"
 
 
-OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "").strip()
+QWEN_API_KEY = os.environ.get(
+    "QWEN_36PLUS_API",
+    ""
+).strip()
+
 
 AI_MODEL = os.environ.get(
     "AI_MODEL",
-    "openrouter/free"
+    "qwen3.6-plus"
 )
 
-AI_API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
+AI_API_URL = "https://hub.linux.do/v1/chat/completions"
 
 
 OUTPUT_DIR = "site"
@@ -137,9 +141,9 @@ def call_ai(news_text, date_str):
     #     raise RuntimeError(
     #         "没有找到 DEEPSEEK_API_KEY，请检查 GitHub Secrets"
     #     )
-    if not OPENROUTER_API_KEY:
+    if not QWEN_API_KEY:
         raise RuntimeError(
-            "没有找到 OPENROUTER_API_KEY，请检查 GitHub Secrets"
+            "没有找到 QWEN_API_KEY，请检查 GitHub Secrets"
         )
     system_prompt = """
 你是一名名资深新闻编辑和政策研究员。
@@ -305,10 +309,7 @@ def call_ai(news_text, date_str):
         data=body,
         headers={
             "Content-Type": "application/json",
-            # "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
-            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-            "HTTP-Referer": "https://github.com/",
-            "X-Title": "News Lianbo AI RSS",
+            "Authorization": f"Bearer {QWEN_API_KEY}",
             "User-Agent": "news-lianbo-ai-rss"
         },
         method="POST"
