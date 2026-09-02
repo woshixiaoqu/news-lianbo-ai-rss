@@ -49,8 +49,8 @@ jobs:
         #   GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
         #   GITHUB_REPOSITORY: ${{ github.repository }}
         env:
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          AI_MODEL: openrouter/free
+          Qwen_36Plus_API: ${{ secrets.Qwen_36Plus_API }}
+          AI_MODEL: qwen3.6-plus
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
