@@ -129,15 +129,18 @@ def download_news(date_str):
 
 
 # ==============================
-# 调用 DeepSeek
+# 调用 api
 # ==============================
 
 def call_ai(news_text, date_str):
-    if not DEEPSEEK_API_KEY:
+    # if not DEEPSEEK_API_KEY:
+    #     raise RuntimeError(
+    #         "没有找到 DEEPSEEK_API_KEY，请检查 GitHub Secrets"
+    #     )
+    if not OPENROUTER_API_KEY:
         raise RuntimeError(
-            "没有找到 DEEPSEEK_API_KEY，请检查 GitHub Secrets"
+            "没有找到 OPENROUTER_API_KEY，请检查 GitHub Secrets"
         )
-
     system_prompt = """
 你是一名专业的新闻编辑。
 
@@ -223,7 +226,10 @@ def call_ai(news_text, date_str):
         data=body,
         headers={
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
+            # "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
+            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+            "HTTP-Referer": "https://github.com/",
+            "X-Title": "News Lianbo AI RSS",
             "User-Agent": "news-lianbo-ai-rss"
         },
         method="POST"
