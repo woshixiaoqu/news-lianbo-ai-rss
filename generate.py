@@ -23,7 +23,7 @@ SOURCE_BRANCH = "master"
 
 
 QWEN_API_KEY = os.environ.get(
-    "QWEN_36PLUS_API",
+    "QWEN_API_KEY",
     ""
 ).strip()
 
