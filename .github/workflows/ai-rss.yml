@@ -49,7 +49,7 @@ jobs:
         #   GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
         #   GITHUB_REPOSITORY: ${{ github.repository }}
         env:
-          Qwen_36Plus_API: ${{ secrets.Qwen_36Plus_API }}
+          QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
           AI_MODEL: qwen3.6-plus
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
           GITHUB_REPOSITORY: ${{ github.repository }}
