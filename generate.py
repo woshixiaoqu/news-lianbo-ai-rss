@@ -14,12 +14,24 @@ from urllib.error import HTTPError, URLError
 SOURCE_REPO = "DuckBurnIncense/xin-wen-lian-bo"
 SOURCE_BRANCH = "master"
 
-DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY", "").strip()
+# DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY", "").strip()
 
-# 可以在这里更换模型
-AI_MODEL = os.environ.get("AI_MODEL", "deepseek-v4-pro")
+# # 可以在这里更换模型
+# AI_MODEL = os.environ.get("AI_MODEL", "deepseek-v4-pro")
 
-AI_API_URL = "https://api.deepseek.com/chat/completions"
+# AI_API_URL = "https://api.deepseek.com/chat/completions"
+
+
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "").strip()
+
+AI_MODEL = os.environ.get(
+    "AI_MODEL",
+    "openrouter/free"
+)
+
+AI_API_URL = "https://openrouter.ai/api/v1/chat/completions"
+
+
 
 OUTPUT_DIR = "site"
 FEED_FILE = os.path.join(OUTPUT_DIR, "feed.xml")
