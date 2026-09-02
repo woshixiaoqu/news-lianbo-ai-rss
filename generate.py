@@ -401,8 +401,8 @@ def xml_escape(text):
 
 
 def make_rss_item(date_str, ai_summary, source_url):
-    title = f"📺 {date_str[:4]}-{date_str[4:6]}-{date_str[6:]} 新闻联播 AI 重点"
-
+    # title = f"📺 {date_str[:4]}-{date_str[4:6]}-{date_str[6:]} 新闻联播 AI 重点"
+    title = f"📺 新闻联播 AI日报 | {date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
     description = f"""
 <div>
 {markdown_to_html(ai_summary)}
