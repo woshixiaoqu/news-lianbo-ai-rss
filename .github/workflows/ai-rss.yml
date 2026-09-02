@@ -57,19 +57,20 @@ jobs:
           python generate.py
 
       # 4. 把生成好的 RSS 保存回 GitHub
-      - name: Commit generated RSS
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      # - name: Commit generated RSS
+        # run: |
+        #   git config user.name "github-actions[bot]"
+        #   git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add site/feed.xml site/index.html
+        #   git add site/feed.xml site/index.html
 
-          if git diff --cached --quiet; then
-            echo "没有新的 RSS 内容需要提交"
-          else
-            git commit -m "Update AI RSS"
-            git push
-          fi
+        #   if git diff --cached --quiet; then
+        #     echo "没有新的 RSS 内容需要提交"
+        #   else
+        #     git commit -m "Update AI RSS"
+        #     git pull --rebase origin main
+        #     git push
+        #   fi
 
       # 5. 配置 GitHub Pages
       - name: Setup Pages
