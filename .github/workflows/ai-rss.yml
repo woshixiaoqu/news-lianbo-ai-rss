@@ -43,9 +43,14 @@ jobs:
 
       # 3. 运行新闻联播 AI RSS 程序
       - name: Generate AI RSS
+        # env:
+        #   DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        #   AI_MODEL: deepseek-v4-pro
+        #   GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+        #   GITHUB_REPOSITORY: ${{ github.repository }}
         env:
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-          AI_MODEL: deepseek-v4-pro
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          AI_MODEL: openrouter/free
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
