@@ -298,7 +298,8 @@ def call_ai(news_text, date_str):
                 "content": user_prompt
             }
         ],
-        "temperature": 0.2,
+        "temperature": 0.1,
+        "max_tokens": 8000,
         "stream": False
     }
 
