@@ -1,10 +1,10 @@
 name: 新闻联播 AI RSS
 
 on:
-  # 每天北京时间 22:30 左右运行
-  # GitHub 使用 UTC，这里 13:30 UTC = 北京时间 21:30
+  # 每天北京时间 7 左右运行
+  # GitHub 使用 UTC，这里 23:00 UTC = 北京时间 7:00 、+8的关系
   schedule:
-    - cron: "30 13 * * *"
+    - cron: "00 23 * * *"
 
   # 允许你手动运行
   workflow_dispatch:
